@@ -15,7 +15,7 @@ app.use(cors({
 
 app.post("/sendMessage", async (req, res) => {
 
-    if (origin != "https://umbrella-plus.com.ua") {
+    if (req.headers.origin && req.headers.origin !== "https://umbrella-plus.com.ua") {
         return res.status(403).json({error: "Forbidden"});
     }
 
