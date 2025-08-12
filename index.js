@@ -10,17 +10,13 @@ const botToken = process.env.BOT_TOKEN;
 const chatIds = JSON.parse(process.env.CHAT_ID);
 
 app.use(cors({
-    origin: ["https://umbrella-plus.com.ua", "http://localhost:1313"]
+    origin: "https://umbrella-plus.com.ua"
 }));
 
 app.post("/sendMessage", async (req, res) => {
 
-    if (
-        req.headers.origin &&
-        !["https://umbrella-plus.com.ua", "http://localhost:1313"]
-            .includes(req.headers.origin)
-    ) {
-        return res.status(403).json({ error: "Forbidden" });
+    if (req.headers.origin && req.headers.origin !== "https://umbrella-plus.com.ua") {
+        return res.status(403).json({error: "Forbidden"});
     }
 
     const {phone} = req.body;
