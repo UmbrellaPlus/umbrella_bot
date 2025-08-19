@@ -13,6 +13,11 @@ app.use(cors({
     origin: "https://umbrella-plus.com.ua"
 }));
 
+app.get("/ping", cors(), (req, res) => {
+    console.log("Ping received ✅");
+    res.send("Bot is awake!");
+});
+
 app.post("/sendMessage", async (req, res) => {
 
     if (req.headers.origin && req.headers.origin !== "https://umbrella-plus.com.ua") {
